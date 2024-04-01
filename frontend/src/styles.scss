@@ -18,8 +18,8 @@ body {
 
 body {
   margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-family: Roboto, 'Helvetica Neue', sans-serif;
   min-height: 100svh;
-  background-color: theme("colors.darker-gray");
-  color: theme("colors.white");
+  background-color: theme('colors.darker-gray');
+  color: theme('colors.white');
 }

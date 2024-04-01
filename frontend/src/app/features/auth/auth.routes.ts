@@ -8,15 +8,11 @@ export const authRoutes: Routes = [
     children: [
       {
         path: 'login',
-        loadChildren: () =>
-          import('./features/login/login.routes').then((m) => m.loginRoutes),
+        loadChildren: () => import('./features/login/login.routes').then(m => m.loginRoutes),
       },
       {
         path: 'register',
-        loadChildren: () =>
-          import('./features/register/register.routes').then(
-            (m) => m.registerRoutes,
-          ),
+        loadChildren: () => import('./features/register/register.routes').then(m => m.registerRoutes),
       },
     ],
   },

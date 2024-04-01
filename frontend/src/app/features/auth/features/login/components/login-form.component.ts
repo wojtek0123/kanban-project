@@ -1,9 +1,4 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject,
-  signal,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { NgClass } from '@angular/common';
@@ -16,34 +11,21 @@ import { InputDirective } from '../../../../../shared/directives/input.directive
 @Component({
   selector: 'app-login-form',
   template: `
-    <form
-      class="w-[24rem] flex flex-col gap-2"
-      [formGroup]="form"
-      (ngSubmit)="onSubmit()"
-    >
+    <form class="w-[24rem] flex flex-col gap-2" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="flex flex-col">
         <label for="email">Email</label>
         <input
           input
           [ngClass]="{
-            'border-red-500':
-              form.controls.email.invalid &&
-              (form.controls.email.touched || isSubmitted)
+            'border-red-500': form.controls.email.invalid && (form.controls.email.touched || isSubmitted)
           }"
           class="text-black px-2 py-1 rounded-lg"
           type="email"
           formControlName="email"
-          id="email"
-        />
-        @if (
-          form.controls.email.getError('required') &&
-          (form.controls.email.touched || isSubmitted)
-        ) {
+          id="email" />
+        @if (form.controls.email.getError('required') && (form.controls.email.touched || isSubmitted)) {
           <span class="text-red-500">Email is required</span>
-        } @else if (
-          form.controls.email.getError('email') &&
-          (form.controls.email.touched || isSubmitted)
-        ) {
+        } @else if (form.controls.email.getError('email') && (form.controls.email.touched || isSubmitted)) {
           <span class="text-red-500">Email is invalid</span>
         }
       </div>
@@ -55,33 +37,19 @@ import { InputDirective } from '../../../../../shared/directives/input.directive
           id="password"
           formControlName="password"
           [ngClass]="{
-            'border-red-500':
-              form.controls.password.invalid &&
-              (form.controls.password.touched || isSubmitted)
-          }"
-        />
-        @if (
-          form.controls.password.getError('required') &&
-          (form.controls.password.touched || isSubmitted)
-        ) {
+            'border-red-500': form.controls.password.invalid && (form.controls.password.touched || isSubmitted)
+          }" />
+        @if (form.controls.password.getError('required') && (form.controls.password.touched || isSubmitted)) {
           <span class="text-red-500">Password is required</span>
-        } @else if (
-          form.controls.password.getError('minlength') &&
-          (form.controls.password.touched || isSubmitted)
-        ) {
-          <span class="text-red-500">
-            Password should have at least 8 characters</span
-          >
+        } @else if (form.controls.password.getError('minlength') && (form.controls.password.touched || isSubmitted)) {
+          <span class="text-red-500"> Password should have at least 8 characters</span>
         }
       </div>
       @if (status() === 'error') {
         <span class="form-invalid-message">{{ error }}</span>
       }
 
-      <button
-        type="submit"
-        class="bg-dark-gray py-2 rounded-lg mt-4 active:bg-dark-gray/80"
-      >
+      <button type="submit" class="bg-dark-gray py-2 rounded-lg mt-4 active:bg-dark-gray/80">
         @if (status() !== 'loading') {
           <span>Sign in</span>
         } @else {
@@ -91,15 +59,7 @@ import { InputDirective } from '../../../../../shared/directives/input.directive
     </form>
   `,
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    NgClass,
-    MatInputModule,
-    MatFormField,
-    MatLabel,
-    NgClass,
-    InputDirective,
-  ],
+  imports: [ReactiveFormsModule, NgClass, MatInputModule, MatFormField, MatLabel, NgClass, InputDirective],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class LoginFormComponent {

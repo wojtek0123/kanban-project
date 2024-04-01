@@ -1,10 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  AuthSession,
-  Session,
-  SupabaseClient,
-  createClient,
-} from '@supabase/supabase-js';
+import { AuthSession, Session, SupabaseClient, createClient } from '@supabase/supabase-js';
 import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { map } from 'rxjs';
@@ -15,10 +10,7 @@ export class SupabaseService {
   private _session$ = new BehaviorSubject<AuthSession | null>(null);
 
   constructor() {
-    this._supabase = createClient(
-      environment.supabaseUrl,
-      environment.supabaseKey,
-    );
+    this._supabase = createClient(environment.supabaseUrl, environment.supabaseKey);
   }
 
   setSession(session: Session | null) {
@@ -64,6 +56,6 @@ export class SupabaseService {
   }
 
   userId$() {
-    return this._session$.pipe(map((session) => session?.user.id));
+    return this._session$.pipe(map(session => session?.user.id));
   }
 }

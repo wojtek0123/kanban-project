@@ -16,11 +16,7 @@ import { InputDirective } from '../../../../../shared/directives/input.directive
 @Component({
   selector: 'app-register-form',
   template: `
-    <form
-      class="w-96 flex flex-col gap-2"
-      [formGroup]="form"
-      (ngSubmit)="onSubmit()"
-    >
+    <form class="w-96 flex flex-col gap-2" [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="flex flex-col">
         <label class="" for="email">Email</label>
         <input
@@ -29,22 +25,13 @@ import { InputDirective } from '../../../../../shared/directives/input.directive
           id="email"
           name="email"
           [ngClass]="{
-            'border-red-500':
-              form.controls.email.invalid &&
-              (form.controls.email.touched || isSubmitted)
+            'border-red-500': form.controls.email.invalid && (form.controls.email.touched || isSubmitted)
           }"
-          formControlName="email"
-        />
-        @if (
-          form.controls.email.getError('email') &&
-          (form.controls.email.touched || isSubmitted)
-        ) {
+          formControlName="email" />
+        @if (form.controls.email.getError('email') && (form.controls.email.touched || isSubmitted)) {
           <span class="text-red-500">Email is invalid</span>
         }
-        @if (
-          form.controls.email.getError('required') &&
-          (form.controls.email.touched || isSubmitted)
-        ) {
+        @if (form.controls.email.getError('required') && (form.controls.email.touched || isSubmitted)) {
           <span class="text-red-500">Email is required</span>
         }
       </div>
@@ -56,22 +43,13 @@ import { InputDirective } from '../../../../../shared/directives/input.directive
           id="nick"
           formControlName="nickname"
           [ngClass]="{
-            'border-red-500':
-              form.controls.nickname.invalid &&
-              (form.controls.nickname.touched || isSubmitted)
+            'border-red-500': form.controls.nickname.invalid && (form.controls.nickname.touched || isSubmitted)
           }"
-          required
-        />
-        @if (
-          form.controls.nickname.getError('required') &&
-          (form.controls.nickname.touched || isSubmitted)
-        ) {
+          required />
+        @if (form.controls.nickname.getError('required') && (form.controls.nickname.touched || isSubmitted)) {
           <span class="text-red-500">Nickname is required</span>
         }
-        @if (
-          form.controls.nickname.getError('maxLength') &&
-          (form.controls.nickname.touched || isSubmitted)
-        ) {
+        @if (form.controls.nickname.getError('maxLength') && (form.controls.nickname.touched || isSubmitted)) {
           <span class="text-red-500">Nickname has max 25 characters</span>
         }
       </div>
@@ -83,23 +61,12 @@ import { InputDirective } from '../../../../../shared/directives/input.directive
           id="password"
           formControlName="password"
           [ngClass]="{
-            'border-red-500':
-              form.controls.password.invalid &&
-              (form.controls.password.touched || isSubmitted)
-          }"
-        />
-        @if (
-          form.controls.password.getError('minlength') &&
-          (form.controls.password.touched || isSubmitted)
-        ) {
-          <span class="text-red-500">
-            Password should have at least 8 characters
-          </span>
+            'border-red-500': form.controls.password.invalid && (form.controls.password.touched || isSubmitted)
+          }" />
+        @if (form.controls.password.getError('minlength') && (form.controls.password.touched || isSubmitted)) {
+          <span class="text-red-500"> Password should have at least 8 characters </span>
         }
-        @if (
-          form.controls.password.getError('required') &&
-          (form.controls.password.touched || isSubmitted)
-        ) {
+        @if (form.controls.password.getError('required') && (form.controls.password.touched || isSubmitted)) {
           <span class="text-red-500">Password is required</span>
         }
       </div>
@@ -112,13 +79,10 @@ import { InputDirective } from '../../../../../shared/directives/input.directive
           formControlName="confirmPassword"
           [ngClass]="{
             'border-red-500':
-              form.controls.confirmPassword.invalid &&
-              (form.controls.confirmPassword.touched || isSubmitted)
-          }"
-        />
+              form.controls.confirmPassword.invalid && (form.controls.confirmPassword.touched || isSubmitted)
+          }" />
         @if (
-          form.controls.confirmPassword.getError('required') &&
-          (form.controls.confirmPassword.touched || isSubmitted)
+          form.controls.confirmPassword.getError('required') && (form.controls.confirmPassword.touched || isSubmitted)
         ) {
           <span class="text-red-500">Confirm password is required</span>
         }
@@ -129,10 +93,7 @@ import { InputDirective } from '../../../../../shared/directives/input.directive
           <span class="text-red-500">Passwords do not match</span>
         }
       </div>
-      <button
-        type="submit"
-        class="bg-dark-gray py-2 rounded-lg mt-4 active:bg-dark-gray/80"
-      >
+      <button type="submit" class="bg-dark-gray py-2 rounded-lg mt-4 active:bg-dark-gray/80">
         @if (status === 'loading') {
           <span>Loading...</span>
         } @else {
@@ -162,7 +123,7 @@ export class RegisterFormComponent {
     },
     {
       validators: [this.matchPassword('password', 'confirmPassword')],
-    },
+    }
   );
 
   matchPassword(password: string, confirmPassword: string) {
@@ -174,10 +135,7 @@ export class RegisterFormComponent {
         return null;
       }
 
-      if (
-        confirmPasswordControl.errors &&
-        !confirmPasswordControl.errors['passwordMismatch']
-      ) {
+      if (confirmPasswordControl.errors && !confirmPasswordControl.errors['passwordMismatch']) {
         return null;
       }
 
@@ -201,7 +159,7 @@ export class RegisterFormComponent {
       const { error, data } = await this.supabase.signUp(
         this.form.controls.email.value ?? '',
         this.form.controls.password.value ?? '',
-        this.form.controls.nickname.value ?? '',
+        this.form.controls.nickname.value ?? ''
       );
       if (error) {
         this.status = 'error';
